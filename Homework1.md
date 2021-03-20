@@ -1,4 +1,6 @@
 ## Implement a basic image processing pipeline
+## Homework Assignment 1
+Environment: MATLAB
 
 You can use the [editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
