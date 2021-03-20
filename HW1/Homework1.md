@@ -155,6 +155,8 @@ for i = 1:7
     imwrite(img_wb_dem_out, file_name, 'quality', quality_value(i));
 end
 ```
+
+<html>
 <div id="main-carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -238,7 +240,7 @@ end
         </a>
       </div>
 </div>
-      
+</html>      
 <p align="center">
     <img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%">
     <img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%">
