@@ -63,8 +63,16 @@ imwrite(min(1, img_bggr*5), 'img_BayerPattern_bggr.png');
 img_rgb = img_rggb;
 ```
 <p align="center">
-    <img src="Images/img_BayerPattern_rggb.png" width="40%" height="40%">
-    <img src="Images/img_BayerPattern_bggr.png" width="40%" height="40%">
+    <table>
+        <tr>
+            <th><img src="Images/img_BayerPattern_rggb.png"></th>
+            <th><img src="Images/img_BayerPattern_bggr.png"></th>
+        </tr>
+        <tr>
+            <th><p align = "center">Image as RGGB</p></th>
+            <th><p align = "center">Image as BGGR</p></th>       
+        </tr>
+    </table>
 </p>
 
 Now I compare the results by concatenating 3 values in each format.  
@@ -173,10 +181,10 @@ end
             <th><img src="Images/img_wb_dem_gamma_q5.jpeg"></th>
         </tr>
         <tr>
-            <th>Quality 35%</th>
-            <th>Quality 20%</th>
-            <th>Quality 10%</th>
-            <th>Quality 5%</th>
+            <th><p align = "center">Quality 35%</p></th>
+            <th><p align = "center">Quality 20%</p></th>
+            <th><p align = "center">Quality 10%</p></th>
+            <th><p align = "center">Quality 5%</p></th>   
         </tr>
     </table>
 </p>
