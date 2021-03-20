@@ -15,7 +15,7 @@ disp(class(tiff_img));
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
 ```
-<img src="Images/tiff_img.png" width="50%" height="50%" align = "center">  
+<img src="Images/tiff_img.png" width="50%" height="50%" align="center">  
 
 banana_slug.tiff file is loaded using imread function.  
 Using size and class, we obtain information of the image format.  
