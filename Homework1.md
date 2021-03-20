@@ -1,7 +1,6 @@
 ## Implement a basic image processing pipeline
 
 Homework Assignment 1
-
 Environment: MATLAB
 
 [editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/Homework1.md)
