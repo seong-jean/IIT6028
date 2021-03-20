@@ -155,18 +155,24 @@ end
 <p align="center">
     <table>
         <tr>
+            <th><img src="Images/img_GammaCorrection.png" width="20%" height="20%"></th>
             <th><img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%"></th>
             <th><img src="Images/img_wb_dem_gamma_q70.jpeg" width="20%" height="20%"></th>
             <th><img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%"></th>
+        </tr>
+        <tr>
+            <th>Quality 100%</th>
+            <th>Quality 95%</th>
+            <th>Quality 70%</th>
+            <th>Quality 50%</th>           
+        </tr>
+        <tr>
             <th><img src="Images/img_wb_dem_gamma_q35.jpeg" width="20%" height="20%"></th>
             <th><img src="Images/img_wb_dem_gamma_q20.jpeg" width="20%" height="20%"></th>
             <th><img src="Images/img_wb_dem_gamma_q10.jpeg" width="20%" height="20%"></th>
             <th><img src="Images/img_wb_dem_gamma_q5.jpeg" width="20%" height="20%"></th>
         </tr>
         <tr>
-            <th>Quality 95%</th>
-            <th>Quality 70%</th>
-            <th>Quality 50%</th>
             <th>Quality 35%</th>
             <th>Quality 20%</th>
             <th>Quality 10%</th>
