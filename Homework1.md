@@ -31,6 +31,8 @@ img = max(0, img);
 img = min(1, img);
 imwrite(img, 'img_Linearization.png');
 ```
+Because only 14 of these pixesl contain useful data, we convert the image into a linear array within the range [0,1].
+Using min and max functions, I removed values above 1 and below 0.
 
 
 ## Identifying the Correct Bayer Pattern
@@ -42,15 +44,24 @@ ba3 = img(2:2:end, 1:2:end);
 ba4 = img(2:2:end, 2:2:end);
 mean_ba = [mean(ba1(:)), mean(ba2(:)), mean(ba3(:)), mean(ba4(:))];
 disp(mean_ba);
+```
+To identify which Bayer pattern is used, I compared the mean value of each space of the 2x2 squares.
+mean_ba shows the mean values, and from here we can acknowledge that the mean of ba2 and ba3 have similar values(=green).
+Since I know the greens, now i need to figure out between RGGB and BGGR.
+
+```matlab
 img_rggb = cat(3, ba1, ba3, ba4);
 img_bggr = cat(3, ba4, ba3, ba1);
 imwrite(min(1, img_rggb*5), 'img_BayerPattern_rggb.png');
 imwrite(min(1, img_bggr*5), 'img_BayerPattern_bggr.png');
 img_rgb = img_rggb;
 ```
+Now I compare the results by concatenating 3 values in each format.
+Knowing that the banana slug should have a yellow color, I set RGGB as the Bayer pattern.
+
 
 ## White Balancing
-
+### White world automatic white balancing
 ```matlab
 im_r = max(max(img_rgb(:, :, 1)));
 im_g = max(max(img_rgb(:, :, 2)));
@@ -58,6 +69,19 @@ im_b = max(max(img_rgb(:, :, 3)));
 img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
 imwrite(img_wb, 'img_WhiteBalancing.png');
 ```
+The image has a high Green value overall, White Balancing is done to adjust Red and Blue values.
+Red and Blue values are incresed by a certain ratio obatined.
+Here I used 'white world automatic white balancing' for this assignment.
+
+### Gray world automatic white balancing
+```matlab
+im_r = mean(mean(img_rgb(:, :, 1)));
+im_g = mean(mean(img_rgb(:, :, 2)));
+im_b = mean(mean(img_rgb(:, :, 3)));
+img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
+imwrite(img_wb, 'img_GrayBalancing_.png');
+```
+This is the script for 'gray world automatic white balancing'. It was not used for this assignment.
 
 ## Demosaicing
 
@@ -68,6 +92,8 @@ img_wb_dem_b = interp2(img_wb(:,:,3));
 img_wb_dem = cat(3, img_wb_dem_r, img_wb_dem_g, img_wb_dem_b);
 imwrite(img_wb_dem, 'img_Demosaicing.png');
 ```
+
+
 
 ## Brightness Adjustment and Gamma Correction
 
