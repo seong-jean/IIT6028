@@ -153,11 +153,11 @@ end
 ```
 
 <p align="center">
-    <img src="Images/img_wb_dem_gamma_q95.png" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q50.png" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q35.png" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q10.png" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q5.png" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q35.jpeg" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q10.jpeg" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q5.jpeg" width="20%" height="20%">
 </p>
 
 Finally, i apply compression to the image in several values.  
