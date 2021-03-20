@@ -167,10 +167,10 @@ end
             <th>Quality 50%</th>           
         </tr>
         <tr>
-            <th><img src="Images/img_wb_dem_gamma_q35.jpeg" width="20%" height="20%"></th>
-            <th><img src="Images/img_wb_dem_gamma_q20.jpeg" width="20%" height="20%"></th>
-            <th><img src="Images/img_wb_dem_gamma_q10.jpeg" width="20%" height="20%"></th>
-            <th><img src="Images/img_wb_dem_gamma_q5.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q35.jpeg"></th>
+            <th><img src="Images/img_wb_dem_gamma_q20.jpeg"></th>
+            <th><img src="Images/img_wb_dem_gamma_q10.jpeg"></th>
+            <th><img src="Images/img_wb_dem_gamma_q5.jpeg"></th>
         </tr>
         <tr>
             <th>Quality 35%</th>
