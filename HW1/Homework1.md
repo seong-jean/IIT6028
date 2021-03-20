@@ -3,7 +3,6 @@
 Homework Assignment 1  
 Environment: MATLAB
 
-[editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/Homework1.md)
 
 ## Initials
 
@@ -16,6 +15,7 @@ disp(class(tiff_img));
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
 ```
+<img src="/Images/tiff_img.png" width="50%" height="50%">
 banana_slug.tiff file is loaded using imread function.  
 Using size and class, we obtain information of the image format.  
 Its size is 2856 * 4290 (Height * Width), and each value is a unit16 format.  
