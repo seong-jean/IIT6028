@@ -15,10 +15,6 @@ disp(X);
 class(tiff_img);
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
 ## Linearization
@@ -26,7 +22,6 @@ imwrite(tiff_img, 'tiff_img.png');
 img = (img - 2047)/(15000-2047);
 img = max(0, img);
 img = min(1, img);
-
 imwrite(img, 'img_Linearization.png');
 ```
 
