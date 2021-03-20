@@ -16,7 +16,7 @@ imwrite(tiff_img, 'tiff_img.png');
 ```
 <p align="center">
     <img src="Images/tiff_img.png" width="50%" height="50%">
-    <p align="center">'<tiff image file>'</p> 
+    <p align="center">&lt tiff image file &t</p> 
 </p>
 
 banana_slug.tiff file is loaded using imread function.  
