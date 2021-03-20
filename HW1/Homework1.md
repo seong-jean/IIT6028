@@ -1,5 +1,5 @@
 ## Implement a basic image processing pipeline
-
+<meta charset="UTF-8">
 Homework Assignment 1  
 Environment: MATLAB
 
