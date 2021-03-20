@@ -39,7 +39,7 @@ Using min and max functions, I removed values above 1 and below 0.
 
 <p align="center">
     <img src="Images/img_Linearization.png" width="50%" height="50%">
-    <p align="center">Linearization</p> 
+    <p align="center">&ltLinearization&gt</p> 
 </p>
 
 
@@ -93,7 +93,7 @@ imwrite(img_wb, 'img_WhiteBalancing.png');
 
 <p align="center">
     <img src="Images/img_WhiteBalancing.png" width="50%" height="50%">
-    <p align="center">White Balancing</p> 
+    <p align="center">&ltWhite Balancing&gt</p> 
 </p>
 
 The image has a high Green value overall, White Balancing is done to adjust Red and Blue values.  
@@ -110,7 +110,7 @@ imwrite(img_wb, 'img_GrayBalancing.png');
 ```
 <p align="center">
     <img src="Images/img_GrayBalancing.png" width="50%" height="50%">
-    <p align="center">Gray Balancing</p>
+    <p align="center">&ltGray Balancing&gt</p>
 </p>
 
 This is the script for 'gray world automatic white balancing'. It was not used for this assignment.  
@@ -129,7 +129,7 @@ Here instead of using the demosaic function, it is improvised using interp2 func
 
 <p align="center">
     <img src="Images/img_Demosaicing.png" width="50%" height="50%">
-    <p align="center">Demosaicing</p>
+    <p align="center">&ltDemosaicing&gt</p>
 </p>
 
 ## Brightness Adjustment and Gamma Correction
@@ -146,7 +146,7 @@ imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
 ```
 <p align="center">
     <img src="Images/img_GammaCorrection.png" width="50%" height="50%">
-    <p align="center">Brightness Adjustment and Gamma Correction</p>
+    <p align="center">&ltBrightness Adjustment and Gamma Correction&gt</p>
 </p>
 
 Still, the image is too dark, I adjusted the image brightness by 2.8.
