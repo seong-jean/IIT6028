@@ -2,15 +2,6 @@
 
 Homework Assignment 1  
 Environment: MATLAB
-<html>
-    <head>
-        <!-- Add the slick-theme.css if you want default styling -->
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        <!-- Add the slick-theme.css if you want default styling -->
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    </head>
-bower install --save slick-carousel
-
 
 ## Initials
 
@@ -160,24 +151,28 @@ for i = 1:7
 end
 ```
 
-    <body>
-    <div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-        <div><h3>1</h3></div>
-        <div><h3>2</h3></div>
-        <div><h3>3</h3></div>
-        <div><h3>4</h3></div>
-        <div><h3>5</h3></div>
-        <div><h3>6</h3></div>
-    </div>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    </body>
-</html>      
+     
 <p align="center">
-    <img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q35.jpeg" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q10.jpeg" width="20%" height="20%">
-    <img src="Images/img_wb_dem_gamma_q5.jpeg" width="20%" height="20%">
+    <table>
+        <tr>
+            <th><img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q70.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q35.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q20.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q10.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_wb_dem_gamma_q5.jpeg" width="20%" height="20%"></th>
+        </tr>
+        <tr>
+            <th>Quality 95%</th>
+            <th>Quality 70%</th>
+            <th>Quality 50%</th>
+            <th>Quality 35%</th>
+            <th>Quality 20%</th>
+            <th>Quality 10%</th>
+            <th>Quality 5%</th>
+        </tr>
+    </table>
 </p>
 
 Finally, i apply compression to the image in several values.  
