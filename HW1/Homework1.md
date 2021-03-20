@@ -233,6 +233,8 @@ end
           <span class="sr-only">Next</span>
         </a>
       </div>
+</div>
+      
 <p align="center">
     <img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%">
     <img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%">
