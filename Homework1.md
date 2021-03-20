@@ -1,12 +1,12 @@
 ## Implement a basic image processing pipeline
-## Homework Assignment 1
+# Homework Assignment 1
 Environment: MATLAB
 
-You can use the [editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+You can use the [editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/Homework1.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Initials
+## Initials
 
 
 
