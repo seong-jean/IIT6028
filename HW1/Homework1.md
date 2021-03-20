@@ -9,6 +9,7 @@ Environment: MATLAB
         <!-- Add the slick-theme.css if you want default styling -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     </head>
+# bower install --save slick-carousel
 
 
 ## Initials
@@ -160,88 +161,13 @@ end
 ```
 
     <body>
-    <div id="main-carousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#main-carousel" data-slide-to="1"></li>
-          <li data-target="#main-carousel" data-slide-to="2"></li>
-          <li data-target="#main-carousel" data-slide-to="3"></li>
-          <li data-target="#main-carousel" data-slide-to="4"></li>
-          <li data-target="#main-carousel" data-slide-to="5"></li>
-          <li data-target="#main-carousel" data-slide-to="6"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-
-          <div class="item active" id="item_1">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q95.jpeg" alt="img_1">
-            <div class="carousel-caption">
-              <h3>Quality 95%</h3>
-              <p>original tiff image</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q70.jpeg" alt="img_2">
-            <div class="carousel-caption">
-              <h3>Quality 70%</h3>
-              <p>after linearization</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q50.jpeg" alt="img_3">
-            <div class="carousel-caption">
-              <h3>Quality 50%</h3>
-              <p>left-top: bggr / right-top: gbrg / left-bottom: grbg / right-bottom: rggb(best)</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q35.jpeg" alt="img_4">
-            <div class="carousel-caption">
-              <h3>Quality 35%</h3>
-              <p>results of rggb(best)</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q20.jpeg" alt="img_5">
-            <div class="carousel-caption">
-              <h3>Quality 20%</h3>
-              <p>top: gray world / bottom: white world(best)</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q10.jpeg" alt="img_6">
-            <div class="carousel-caption">
-              <h3>Quality 10%</h3>
-              <p>results of white world automatic white balancing(best)</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img class="results_img" src="Images/img_wb_dem_gamma_q5.jpeg" alt="img_7">
-            <div class="carousel-caption">
-              <h3>Quality 5%</h3>
-              <p>used results of white world AWB</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+    <div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
+        <div><h3>1</h3></div>
+        <div><h3>2</h3></div>
+        <div><h3>3</h3></div>
+        <div><h3>4</h3></div>
+        <div><h3>5</h3></div>
+        <div><h3>6</h3></div>
     </div>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     </body>
