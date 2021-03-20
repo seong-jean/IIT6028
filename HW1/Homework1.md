@@ -1,5 +1,5 @@
 ## Implement a basic image processing pipeline
-
+<html>
 Homework Assignment 1  
 Environment: MATLAB
 
@@ -198,4 +198,4 @@ end
 Finally, i apply compression to the image in several values.  
 From quality value 35 and  lower, compression can be easily observed.
 
-
+</html>
