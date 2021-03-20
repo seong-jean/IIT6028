@@ -9,7 +9,7 @@ Environment: MATLAB
         <!-- Add the slick-theme.css if you want default styling -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     </head>
-# bower install --save slick-carousel
+bower install --save slick-carousel
 
 
 ## Initials
