@@ -12,12 +12,17 @@ tiff_img = imread('C:/Users/ksj/MATLAB/Projects/A1/assign1/data/banana_slug.tiff
 [Height, Width] = size(tiff_img);
 X = ['Image Height : ',num2str(Height),', Image Width : ',num2str(Width)];
 disp(X);
-class(tiff_img);
+disp(class(tiff_img));
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
 ```
+banana_slug.tiff file is loaded using imread function. Using size and class, we obtain information of the image format. 
+Its size is 2856 * 4290 (Height * Width), and each value is a unit16 format. For further process, we change the format to double, and save it as img.
+
+
 
 ## Linearization
+
 ```matlab
 img = (img - 2047)/(15000-2047);
 img = max(0, img);
@@ -25,7 +30,9 @@ img = min(1, img);
 imwrite(img, 'img_Linearization.png');
 ```
 
+
 ## Identifying the Correct Bayer Pattern
+
 ```matlab
 ba1 = img(1:2:end, 1:2:end);
 ba2 = img(1:2:end, 2:2:end);
@@ -41,6 +48,7 @@ img_rgb = img_rggb;
 ```
 
 ## White Balancing
+
 ```matlab
 im_r = max(max(img_rgb(:, :, 1)));
 im_g = max(max(img_rgb(:, :, 2)));
@@ -50,6 +58,7 @@ imwrite(img_wb, 'img_WhiteBalancing.png');
 ```
 
 ## Demosaicing
+
 ```matlab
 img_wb_dem_r = interp2(img_wb(:,:,1));
 img_wb_dem_g = interp2(img_wb(:,:,2));
@@ -59,6 +68,7 @@ imwrite(img_wb_dem, 'img_Demosaicing.png');
 ```
 
 ## Brightness Adjustment and Gamma Correction
+
 ```matlab
 img_wb_dem_gray = rgb2gray(img_wb_dem);
 img_wb_dem = min(1, img_wb_dem * 2.8);
@@ -71,6 +81,7 @@ imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
 ```
 
 ## Compression
+
 ```matlab
 quality_value = [90, 70, 50, 35, 20, 10, 5];
 quality_size = size(quality_value);
