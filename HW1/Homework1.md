@@ -37,6 +37,10 @@ imwrite(img, 'img_Linearization.png');
 Because only 14 of these pixesl contain useful data, we convert the image into a linear array within the range [0,1].  
 Using min and max functions, I removed values above 1 and below 0.  
 
+<p align="center">
+    <img src="Images/img_Linearization.png" width="50%" height="50%">
+</p>
+
 
 ## Identifying the Correct Bayer Pattern
 
@@ -59,6 +63,11 @@ imwrite(min(1, img_rggb*5), 'img_BayerPattern_rggb.png');
 imwrite(min(1, img_bggr*5), 'img_BayerPattern_bggr.png');
 img_rgb = img_rggb;
 ```
+<p align="center">
+    <img src="Images/img_BayerPattern_rggb.png" width="50%" height="50%">
+    <img src="Images/img_BayerPattern_bggr.png" width="50%" height="50%">
+</p>
+
 Now I compare the results by concatenating 3 values in each format.  
 Knowing that the banana slug should have a yellow color, I set RGGB as the Bayer pattern.  
 
@@ -72,6 +81,11 @@ im_b = max(max(img_rgb(:, :, 3)));
 img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
 imwrite(img_wb, 'img_WhiteBalancing.png');
 ```
+
+<p align="center">
+    <img src="Images/img_WhiteBalancing.png" width="50%" height="50%">
+</p>
+
 The image has a high Green value overall, White Balancing is done to adjust Red and Blue values.  
 Red and Blue values are incresed by a certain ratio obatined.  
 Here I used 'white world automatic white balancing' for this assignment.  
@@ -84,6 +98,10 @@ im_b = mean(mean(img_rgb(:, :, 3)));
 img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
 imwrite(img_wb, 'img_GrayBalancing_.png');
 ```
+<p align="center">
+    <img src="Images/img_GrayBalancing.png" width="50%" height="50%">
+</p>
+
 This is the script for 'gray world automatic white balancing'. It was not used for this assignment.  
 
 ## Demosaicing
@@ -98,6 +116,9 @@ imwrite(img_wb_dem, 'img_Demosaicing.png');
 To retrieve color, demosaicing is needed.  
 Here instead of using the demosaic function, it is improvised using interp2 function.  
 
+<p align="center">
+    <img src="Images/img_Demosaicing.png" width="50%" height="50%">
+</p>
 
 ## Brightness Adjustment and Gamma Correction
 
@@ -111,6 +132,10 @@ else
 end
 imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
 ```
+<p align="center">
+    <img src="Images/img_GammaCorrection.png" width="50%" height="50%">
+</p>
+
 Still, the image is too dark, I adjusted the image brightness by 2.8.
 Then, gamma correction(tone reproduction) was applied to the image.
 
@@ -126,5 +151,14 @@ for i = 1:7
     imwrite(img_wb_dem_out, file_name, 'quality', quality_value(i));
 end
 ```
+
+<p align="center">
+    <img src="Images/img_wb_dem_gamma_q95.png" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q50.png" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q35.png" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q10.png" width="20%" height="20%">
+    <img src="Images/img_wb_dem_gamma_q5.png" width="20%" height="20%">
+</p>
+
 Finally, i apply compression to the image in several values.  
 From quality value 35 and  lower, compression can be easily observed.
