@@ -162,9 +162,9 @@ end
         </tr>
         <tr>
             <th><p align = "center">Quality 100%</p></th>
-            <th>Quality 95%</th>
-            <th>Quality 70%</th>
-            <th>Quality 50%</th>           
+            <th><p align = "center">Quality 95%</p></th>
+            <th><p align = "center">Quality 70%</p></th>
+            <th><p align = "center">Quality 50%</p></th>           
         </tr>
         <tr>
             <th><img src="Images/img_wb_dem_gamma_q35.jpeg"></th>
