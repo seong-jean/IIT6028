@@ -31,7 +31,7 @@ imwrite(img, 'img_Linearization.png');
 ```
 
 ## Identifying the Correct Bayer Pattern
-```
+```matlab
 ba1 = img(1:2:end, 1:2:end);
 ba2 = img(1:2:end, 2:2:end);
 ba3 = img(2:2:end, 1:2:end);
@@ -46,7 +46,7 @@ img_rgb = img_rggb;
 ```
 
 ## White Balancing
-```
+```matlab
 im_r = max(max(img_rgb(:, :, 1)));
 im_g = max(max(img_rgb(:, :, 2)));
 im_b = max(max(img_rgb(:, :, 3)));
@@ -55,7 +55,7 @@ imwrite(img_wb, 'img_WhiteBalancing.png');
 ```
 
 ## Demosaicing
-```
+```matlab
 img_wb_dem_r = interp2(img_wb(:,:,1));
 img_wb_dem_g = interp2(img_wb(:,:,2));
 img_wb_dem_b = interp2(img_wb(:,:,3));
@@ -64,7 +64,7 @@ imwrite(img_wb_dem, 'img_Demosaicing.png');
 ```
 
 ## Brightness Adjustment and Gamma Correction
-```
+```matlab
 img_wb_dem_gray = rgb2gray(img_wb_dem);
 img_wb_dem = min(1, img_wb_dem * 2.8);
 if img_wb_dem_gray <= 0.0031308
@@ -76,7 +76,7 @@ imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
 ```
 
 ## Compression
-```
+```matlab
 quality_value = [90, 70, 50, 35, 20, 10, 5];
 quality_size = size(quality_value);
 disp(quality_size);
