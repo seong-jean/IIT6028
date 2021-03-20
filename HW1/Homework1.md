@@ -64,8 +64,8 @@ imwrite(min(1, img_bggr*5), 'img_BayerPattern_bggr.png');
 img_rgb = img_rggb;
 ```
 <p align="center">
-    <img src="Images/img_BayerPattern_rggb.png" width="50%" height="50%">
-    <img src="Images/img_BayerPattern_bggr.png" width="50%" height="50%">
+    <img src="Images/img_BayerPattern_rggb.png" width="40%" height="40%">
+    <img src="Images/img_BayerPattern_bggr.png" width="40%" height="40%">
 </p>
 
 Now I compare the results by concatenating 3 values in each format.  
@@ -96,7 +96,7 @@ im_r = mean(mean(img_rgb(:, :, 1)));
 im_g = mean(mean(img_rgb(:, :, 2)));
 im_b = mean(mean(img_rgb(:, :, 3)));
 img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
-imwrite(img_wb, 'img_GrayBalancing_.png');
+imwrite(img_wb, 'img_GrayBalancing.png');
 ```
 <p align="center">
     <img src="Images/img_GrayBalancing.png" width="50%" height="50%">
