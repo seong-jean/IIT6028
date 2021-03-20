@@ -1,6 +1,7 @@
 ## Implement a basic image processing pipeline
 
 Homework Assignment 1
+
 Environment: MATLAB
 
 [editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/Homework1.md)
@@ -22,12 +23,55 @@ imwrite(tiff_img, 'tiff_img.png');
 [Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Linearization
+```markdown
+img = (img - 2047)/(15000-2047);
+img = max(0, img);
+img = min(1, img);
 
-### Jekyll Themes
+imwrite(img, 'img_Linearization.png');
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/seong-jean/IIT6028/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Identifying the Correct Bayer Pattern
+```markdown
+ba1 = img(1:2:end, 1:2:end);
+ba2 = img(1:2:end, 2:2:end);
+ba3 = img(2:2:end, 1:2:end);
+ba4 = img(2:2:end, 2:2:end);
+mean_ba = [mean(ba1(:)), mean(ba2(:)), mean(ba3(:)), mean(ba4(:))];
+disp(mean_ba);
+img_rgb = cat(3, ba1, ba3, ba4);
 
-### Support or Contact
+imwrite(min(1, img_rgb*5), 'img_BayerPattern.png');
+```
+
+## White Balancing
+```markdown
+img_wbg = white_balancing_grey(img_rgb);
+img_wb = white_balancing_white(img_rgb);
+
+imwrite(img_wb, 'img_WhiteBalancing.png');
+```
+
+## Demosaicing
+```markdown
+img_wb_dem_r = interp2(img_wb(:,:,1));
+img_wb_dem_g = interp2(img_wb(:,:,2));
+img_wb_dem_b = interp2(img_wb(:,:,3));
+img_wb_dem = cat(3, img_wb_dem_r, img_wb_dem_g, img_wb_dem_b);
+
+imwrite(img_wb_dem, 'img_Demosaicing.png');
+```
+
+## Brightness Adjustment and Gamma Correction
+```markdown
+img_wb_dem_gamma = rgb2gray(img_wb_dem);
+if img_wb_dem_gamma < 0.0031308
+    img_wb_dem_gamma = 12.92 * img_wb_dem;
+else
+    img_wb_dem_gamma = (1.055) * power(img_wb_dem, 1/2.4) - 0.055;
+end
+imwrite(img_wb_dem_gamma, 'img_GammaCorrection.png');
+```
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
