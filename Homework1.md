@@ -16,8 +16,10 @@ disp(class(tiff_img));
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
 ```
-banana_slug.tiff file is loaded using imread function. Using size and class, we obtain information of the image format. 
-Its size is 2856 * 4290 (Height * Width), and each value is a unit16 format. For further process, we change the format to double, and save it as img.
+banana_slug.tiff file is loaded using imread function.  
+Using size and class, we obtain information of the image format.  
+Its size is 2856 * 4290 (Height * Width), and each value is a unit16 format.  
+For further process, we change the format to double, and save it as img.  
 
 
 
