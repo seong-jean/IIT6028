@@ -155,10 +155,10 @@ end
 <p align="center">
     <table>
         <tr>
-            <th><img src="Images/img_GammaCorrection.png" width="20%" height="20%"></th>
-            <th><img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%"></th>
-            <th><img src="Images/img_wb_dem_gamma_q70.jpeg" width="20%" height="20%"></th>
-            <th><img src="Images/img_wb_dem_gamma_q50.jpeg" width="20%" height="20%"></th>
+            <th><img src="Images/img_GammaCorrection.png"></th>
+            <th><img src="Images/img_wb_dem_gamma_q95.jpeg"></th>
+            <th><img src="Images/img_wb_dem_gamma_q70.jpeg"></th>
+            <th><img src="Images/img_wb_dem_gamma_q50.jpeg"></th>
         </tr>
         <tr>
             <th>Quality 100%</th>
