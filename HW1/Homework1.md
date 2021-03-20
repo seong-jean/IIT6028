@@ -161,7 +161,7 @@ end
             <th><img src="Images/img_wb_dem_gamma_q50.jpeg"></th>
         </tr>
         <tr>
-            <th><p align = "center">Quality 100%</th>
+            <th><p align = "center">Quality 100%</p></th>
             <th>Quality 95%</th>
             <th>Quality 70%</th>
             <th>Quality 50%</th>           
