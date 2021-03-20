@@ -1,14 +1,13 @@
 ## Implement a basic image processing pipeline
 
-Homework Assignment 1
-
+Homework Assignment 1  
 Environment: MATLAB
 
 [editor on GitHub](https://github.com/seong-jean/IIT6028/edit/gh-pages/Homework1.md)
 
 ## Initials
 
-```markdown
+```
 
 tiff_img = imread('C:/Users/ksj/MATLAB/Projects/A1/assign1/data/banana_slug.tiff');
 [Height, Width] = size(tiff_img);
@@ -24,7 +23,7 @@ imwrite(tiff_img, 'tiff_img.png');
 ```
 
 ## Linearization
-```markdown
+```
 img = (img - 2047)/(15000-2047);
 img = max(0, img);
 img = min(1, img);
