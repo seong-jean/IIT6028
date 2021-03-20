@@ -68,11 +68,11 @@ imwrite(img_wb_dem, 'img_Demosaicing.png');
 ## Brightness Adjustment and Gamma Correction
 ```markdown
 img_wb_dem_gray = rgb2gray(img_wb_dem);
-img_wb_dem = min(1, img_wb_dem .* 2.8);
+img_wb_dem = min(1, img_wb_dem /* 2.8);
 if img_wb_dem_gray <= 0.0031308
-    img_wb_dem_out = 12.92 .* img_wb_dem;
+    img_wb_dem_out = 12.92 ** img_wb_dem;
 else
-    img_wb_dem_out = (1.055) .* power(img_wb_dem, 1/2.4) - 0.055;
+    img_wb_dem_out = (1.055) \* power(img_wb_dem, 1/2.4) - 0.055;
 end
 imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
 ```
