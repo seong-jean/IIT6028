@@ -4,7 +4,10 @@ Homework Assignment 1
 Environment: MATLAB
 <html>
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+        <!-- Add the slick-theme.css if you want default styling -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <!-- Add the slick-theme.css if you want default styling -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     </head>
 </html>  
 
@@ -157,7 +160,8 @@ end
 ```
 
 <html>
-<div id="main-carousel" class="carousel slide" data-ride="carousel">
+    <body>
+    <div id="main-carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
@@ -239,7 +243,9 @@ end
           <span class="sr-only">Next</span>
         </a>
       </div>
-</div>
+    </div>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    </body>
 </html>      
 <p align="center">
     <img src="Images/img_wb_dem_gamma_q95.jpeg" width="20%" height="20%">
@@ -251,3 +257,5 @@ end
 
 Finally, i apply compression to the image in several values.  
 From quality value 35 and  lower, compression can be easily observed.
+
+
