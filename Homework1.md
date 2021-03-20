@@ -31,8 +31,8 @@ img = max(0, img);
 img = min(1, img);
 imwrite(img, 'img_Linearization.png');
 ```
-Because only 14 of these pixesl contain useful data, we convert the image into a linear array within the range [0,1].
-Using min and max functions, I removed values above 1 and below 0.
+Because only 14 of these pixesl contain useful data, we convert the image into a linear array within the range [0,1].  
+Using min and max functions, I removed values above 1 and below 0.  
 
 
 ## Identifying the Correct Bayer Pattern
@@ -45,9 +45,9 @@ ba4 = img(2:2:end, 2:2:end);
 mean_ba = [mean(ba1(:)), mean(ba2(:)), mean(ba3(:)), mean(ba4(:))];
 disp(mean_ba);
 ```
-To identify which Bayer pattern is used, I compared the mean value of each space of the 2x2 squares.
-mean_ba shows the mean values, and from here we can acknowledge that the mean of ba2 and ba3 have similar values(=green).
-Since I know the greens, now i need to figure out between RGGB and BGGR.
+To identify which Bayer pattern is used, I compared the mean value of each space of the 2x2 squares.  
+mean_ba shows the mean values, and from here we can acknowledge that the mean of ba2 and ba3 have similar values(=green).  
+Since I know the greens, now i need to figure out between RGGB and BGGR.  
 
 ```matlab
 img_rggb = cat(3, ba1, ba3, ba4);
@@ -56,8 +56,8 @@ imwrite(min(1, img_rggb*5), 'img_BayerPattern_rggb.png');
 imwrite(min(1, img_bggr*5), 'img_BayerPattern_bggr.png');
 img_rgb = img_rggb;
 ```
-Now I compare the results by concatenating 3 values in each format.
-Knowing that the banana slug should have a yellow color, I set RGGB as the Bayer pattern.
+Now I compare the results by concatenating 3 values in each format.  
+Knowing that the banana slug should have a yellow color, I set RGGB as the Bayer pattern.  
 
 
 ## White Balancing
@@ -69,9 +69,9 @@ im_b = max(max(img_rgb(:, :, 3)));
 img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
 imwrite(img_wb, 'img_WhiteBalancing.png');
 ```
-The image has a high Green value overall, White Balancing is done to adjust Red and Blue values.
-Red and Blue values are incresed by a certain ratio obatined.
-Here I used 'white world automatic white balancing' for this assignment.
+The image has a high Green value overall, White Balancing is done to adjust Red and Blue values.  
+Red and Blue values are incresed by a certain ratio obatined.  
+Here I used 'white world automatic white balancing' for this assignment.  
 
 ### Gray world automatic white balancing
 ```matlab
@@ -81,7 +81,7 @@ im_b = mean(mean(img_rgb(:, :, 3)));
 img_wb = cat(3, img_rgb(:,:,1) * im_g / im_r, img_rgb(:,:,2), img_rgb(:,:,3) * im_g / im_b);
 imwrite(img_wb, 'img_GrayBalancing_.png');
 ```
-This is the script for 'gray world automatic white balancing'. It was not used for this assignment.
+This is the script for 'gray world automatic white balancing'. It was not used for this assignment.  
 
 ## Demosaicing
 
@@ -92,7 +92,8 @@ img_wb_dem_b = interp2(img_wb(:,:,3));
 img_wb_dem = cat(3, img_wb_dem_r, img_wb_dem_g, img_wb_dem_b);
 imwrite(img_wb_dem, 'img_Demosaicing.png');
 ```
-
+To retrieve color, demosaicing is needed.  
+Here instead of using the demosaic function, it is improvised using interp2 function.  
 
 
 ## Brightness Adjustment and Gamma Correction
@@ -107,11 +108,14 @@ else
 end
 imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
 ```
+Still, the image is too dark, I adjusted the image brightness by 2.8.
+Then, gamma correction(tone reproduction) was applied to the image.
+
 
 ## Compression
 
 ```matlab
-quality_value = [90, 70, 50, 35, 20, 10, 5];
+quality_value = [95, 70, 50, 35, 20, 10, 5];
 quality_size = size(quality_value);
 disp(quality_size);
 for i = 1:7
@@ -119,4 +123,5 @@ for i = 1:7
     imwrite(img_wb_dem_out, file_name, 'quality', quality_value(i));
 end
 ```
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Finally, i apply compression to the image in several values.  
+From quality value 35 and  lower, compression can be easily observed.
