@@ -63,9 +63,6 @@ imwrite(min(1, img_rggb*5), 'img_BayerPattern_rggb.png');
 imwrite(min(1, img_bggr*5), 'img_BayerPattern_bggr.png');
 img_rgb = img_rggb;
 ```
-|![Logo]: Images/img_BayerPattern_rggb.png|![Logo]: Images/img_BayerPattern_bggr.png|
-|---|---:|
-|Image as RGGB|Image as BGGR|
 
 <p align="center">
     <table>
