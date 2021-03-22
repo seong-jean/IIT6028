@@ -149,8 +149,8 @@ imwrite(img_wb_dem_out, 'img_GammaCorrection.png');
     <p align="center">Brightness Adjustment and Gamma Correction</p>
 </p>
 
-Still, the image is too dark, I adjusted the image brightness by 2.8.
-Then, gamma correction(tone reproduction) was applied to the image.
+Still, the image is too dark, I adjusted the image brightness by 2.8.  
+Then, gamma correction(tone reproduction) was applied to the image.  
 
 
 ## Compression
@@ -195,7 +195,7 @@ end
     </table>
 </p>
 
-Finally, i apply compression to the image in several values.  
+Finally, i apply compression to the image in several values.    
 From quality value 35 and  lower, compression can be easily observed.
 
 
