@@ -2,6 +2,8 @@
 
 Homework Assignment 1  
 Environment: MATLAB
+Student ID: 2021314109
+Student Name: Seongjean Kim
 
 ## Initials
 
