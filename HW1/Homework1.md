@@ -195,7 +195,7 @@ end
     </table>
 </p>
 
-Finally, i apply compression to the image in several values.   
+Finally, I apply compression to the image in several values.   
 Compression ratio of each is as follow:  
   
 Original File(.PNG) : 16,654,094 Byte  
