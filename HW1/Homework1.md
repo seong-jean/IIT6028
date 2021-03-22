@@ -14,11 +14,12 @@ disp(class(tiff_img));
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
 ```
+<html>
 <p align="center">
     <img src="Images/tiff_img.png" width="50%" height="50%">
-    <span align="center">&lttiff image file</span> 
+    <span align="center">&lt tiff image file</span> 
 </p>
-
+</html>
 banana_slug.tiff file is loaded using imread function.  
 Using size and class, we obtain information of the image format.  
 Its size is 2856 * 4290 (Height * Width), and each value is a unit16 format.  
