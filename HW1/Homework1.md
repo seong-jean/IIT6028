@@ -14,10 +14,10 @@ disp(class(tiff_img));
 img = double(tiff_img);
 imwrite(tiff_img, 'tiff_img.png');
 ```
-<span align="center">
+<p align="center">
     <img src="Images/tiff_img.png" width="50%" height="50%">
-    <p align="center">&lttiff image file</p> 
-</span>
+    <p align="center">tiff image file</p> 
+</p>
 
 banana_slug.tiff file is loaded using imread function.  
 Using size and class, we obtain information of the image format.  
@@ -37,10 +37,10 @@ imwrite(img, 'img_Linearization.png');
 Because only 14 of these pixesl contain useful data, we convert the image into a linear array within the range [0,1].  
 Using min and max functions, I removed values above 1 and below 0.  
 
-<span align="center">
+<p align="center">
     <img src="Images/img_Linearization.png" width="50%" height="50%">
     <p align="center">Linearization</p> 
-</span>
+</p>
 
 
 ## Identifying the Correct Bayer Pattern
