@@ -202,6 +202,8 @@ Original File(.PNG) : 16,654,094 Byte
 Compressed File(.JPEG) : 3,367,979 Byte  
 Compression ratio = 3,367,979 / 16,654,094 = 0.2022  
 
+Comparing the original image and the image with quality 95%, the difference can hardly be observed.  
+
 For all other files  
 Quality : 70%, Compressed File : 1,106,406 Byte, Compression ratio : 1,106,406 / 16,654,094  = 0.0664  
 Quality : 50%, Compressed File : 792,762 Byte, Compression ratio : 792,762 / 16,654,094 = 0.0476  
