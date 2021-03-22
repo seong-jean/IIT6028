@@ -195,7 +195,21 @@ end
     </table>
 </p>
 
-Finally, i apply compression to the image in several values.    
-From quality value 35 and  lower, compression can be easily observed.
+Finally, i apply compression to the image in several values.   
+Compression ratio of each is as follow:  
+  
+Original File(.PNG) : 16,654,094 Byte  
+Compressed File(.JPEG) : 3,367,979 Byte  
+Compression ratio = 3,367,979 / 16,654,094 = 0.2022 
 
+For all other files
+Quality : 70%, Compressed File : 1,106,406 Byte, Compression ratio : 1,106,406 / 16,654,094  = 0.0664
+Quality : 50%, Compressed File : 792,762 Byte, Compression ratio : 792,762 / 16,654,094 = 0.0476
+Quality : 35%, Compressed File : 635,853 Byte, Compression ratio : 635,853 / 16,654,094 = 0.0382
+Quality : 20%, Compressed File : 457,194 Byte, Compression ratio : 457,194 / 16,654,094 = 0.0275
+Quality : 10%, Compressed File : 325,052 Byte, Compression ratio : 325,052 / 16,654,094 = 0.0195
+Quality : 5%, Compressed File : 250,544 Byte, Compression ratio : 250,544 / 16,654,094 = 0.0150
+
+Until qualtiy value 20, the image is undistinguishable from the original image.  
+For quality values lower than 20, the image distortion can be easily observed.
 
