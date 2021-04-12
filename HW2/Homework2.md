@@ -30,6 +30,7 @@ end
     <img src="images/color_transform.png" width="50%" height="50%">
     <p align="center">Color transformation of frame from face.mp4</p> 
 </p>
+
 Each video file (baby2.mp4, face.mp4, own.mp4) is loaded frame by frame.
 Becuase the value of each video is in the range [0, 255], I converted this to [0,1].
 Then, for further use, the video color space is transfered from RGB to YIQ.
@@ -47,15 +48,17 @@ function [output, residual] = laplacian_pyramid(GSD, input)
     output = img_blur(1:2:height, 1:2:width, :);
 end
 ```
+<p align="center">
+    <img src="images/gaussian_example.png" width="50%" height="50%">
+    <p align="center">Laplacian Pyramid</p> 
+</p>
+
+
 The laplacian pyramid is obtained by this function.
 The Gaussian standard deviation is given as a value, and the input is a certain frame from frames.
 For each frame, this function is repeated recursively for a number of times to obtain several levels of the Laplacian pyramid.
 By this process, the residuals of each level is obtained.
 
-<p align="center">
-    <img src="images/gaussian_example.png" width="50%" height="50%">
-    <p align="center">Laplacian Pyramid</p> 
-</p>
 
 ```matlab
 function output = upsample(gaussian_in, residual_in)
@@ -111,10 +114,9 @@ function output = extracting(Hd, input)
     end
 end
 ```
-
 <p align="center">
-    <img src="Images/img_Linearization.png" width="50%" height="50%">
-    <p align="center">Linearization</p> 
+    <img src="images/residual_by5.png" width="50%" height="50%">
+    <p align="center">Residual image multiplied by 5</p> 
 </p>
 
 In this process, freqz function is used to extract Hd_fft info.
@@ -147,8 +149,14 @@ end
 ```
 
 <p align="center">
-    <img src="images/residual_by5.png" width="50%" height="50%">
-    <p align="center">Residual image multiplied by 5</p> 
+    <img src="images/face.gif" width="50%" height="50%">
+    <p align="center">face.mp4 with Eulerian video magnification</p>
+</p>
+
+
+<p align="center">
+    <img src="images/baby2.gif" width="50%" height="50%">
+    <p align="center">baby2.mp4 with Eulerian video magnification</p>
 </p>
 
 This process upsamples the Laplacian pyramid into a single image per frame.
