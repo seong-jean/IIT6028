@@ -166,8 +166,8 @@ The frames are exported and saved as a video.
 ## Capture and Motion-Magnify your own Video
 
 <p align="center">
-    <img src="Images/img_GrayBalancing.png" width="50%" height="50%">
-    <p align="center">Gray Balancing</p>
+    <img src="Images/own.gif" width="50%" height="50%">
+    <p align="center">Own Video Motion-Magnify</p>
 </p>
  
-
+This is the result of motion magnifying on a short clip, where the sleeve of the jacket was shifted slightly due to wind blow.
