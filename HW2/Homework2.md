@@ -27,8 +27,8 @@ function [FR, frames] = video_frame(video_name)
 end
 ```
 <p align="center">
-    <img src="Images/tiff_img.png" width="50%" height="50%">
-    <p align="center">tiff image file</p> 
+    <img src="images/color_transform.png" width="50%" height="50%">
+    <p align="center">Color transformation of frame from face.mp4</p> 
 </p>
 Each video file (baby2.mp4, face.mp4, own.mp4) is loaded frame by frame.
 Becuase the value of each video is in the range [0, 255], I converted this to [0,1].
@@ -53,8 +53,8 @@ For each frame, this function is repeated recursively for a number of times to o
 By this process, the residuals of each level is obtained.
 
 <p align="center">
-    <img src="Images/img_Linearization.png" width="50%" height="50%">
-    <p align="center">Linearization</p> 
+    <img src="images/gaussian_example.png" width="50%" height="50%">
+    <p align="center">Laplacian Pyramid</p> 
 </p>
 
 ```matlab
@@ -63,6 +63,11 @@ function output = upsample(gaussian_in, residual_in)
     output = gaussian_temp + residual_in;
 end
 ```
+<p align="center">
+    <img src="images/yiq_upsample.png" width="50%" height="50%">
+    <p align="center">Upsampling</p> 
+</p>
+
 Using the function implemented above, such Laplacian pyramid for each frame can be upsampled to reform the original image of that frame.
 
 
@@ -70,20 +75,20 @@ Using the function implemented above, such Laplacian pyramid for each frame can 
 
 ```matlab
 function Hd = butterworthBandpassFilter(Fs, N, Fc1, Fc2)
-h  = fdesign.bandpass('N,F3dB1,F3dB2', N, Fc1, Fc2, Fs);
-Hd = design(h, 'butter');
+    h  = fdesign.bandpass('N,F3dB1,F3dB2', N, Fc1, Fc2, Fs);
+    Hd = design(h, 'butter');
 end
 ```
 
 <p align="center">
-    <img src="Images/img_Linearization.png" width="50%" height="50%">
-    <p align="center">Linearization</p> 
+    <img src="images/Temporal_filtering_face.png" width="50%" height="50%">
+    <p align="center">Temporal filtering for face</p> 
 </p>
 
 Temporal filtering is based on butterworthBandpassFilter. 
 Using this function, the frequency band of interest is extracted.
-The values used for baby2.mp4 is Fs = 30, N = 256, Fc1 = 0.8, Fc2 = 1.2
-The values used for face.mp4 is Fs = 30, N = 256, Fc1 = 0.6, Fc2 = 1.2
+The values used for baby2.mp4 is Fs = 30, N = 256, Fc1 = 0.83, Fc2 = 1.16
+The values used for face.mp4 is Fs = 30, N = 256, Fc1 = 0.8, Fc2 = 1.0
 
 
 ## Extracting the Frequency Band of Interest
@@ -142,11 +147,11 @@ end
 ```
 
 <p align="center">
-    <img src="Images/img_WhiteBalancing.png" width="50%" height="50%">
-    <p align="center">White Balancing</p> 
+    <img src="images/residual_by5.png" width="50%" height="50%">
+    <p align="center">Residual image multiplied by 5</p> 
 </p>
 
-This process upsamples the Laplacian pyramid into a singla image per frame.
+This process upsamples the Laplacian pyramid into a single image per frame.
 By setting the a's as different values, we can obtain results with different frequency values amplified.
 The frames are exported and saved as a video.
 
