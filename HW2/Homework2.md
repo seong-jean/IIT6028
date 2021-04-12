@@ -121,10 +121,6 @@ What is returned is the frequency components of the filter for fast computation.
 ```matlab
 frames_recon = zeros(height, width, ch, frame_index);
 
-a1 = 1;
-a2 = 1;
-a3 = 120;
-
 R_Ex_Re_0 = zeros(size(R_Ex_0,1), size(R_Ex_0,2), ch);
 R_Ex_Re_1 = zeros(size(R_Ex_1,1), size(R_Ex_1,2), ch);
 R_Ex_Re_2 = zeros(size(R_Ex_2,1), size(R_Ex_2,2), ch);
@@ -139,7 +135,7 @@ for i = 1:3
         R_Ex_Re_2(:,:,i) = R_Ex_2(:,:,i,t);
         R_Ex_Re_3(:,:,i) = R_Ex_3(:,:,i,t);
         G_Ex_Re_4(:,:,i) = G_Ex_4(:,:,i,t);
-        frame_recon = frames(:,:,i,t) + upsample(a1*upsample(a2*upsample(a3* upsample(G_Ex_Re_4, R_Ex_Re_3), R_Ex_Re_2), R_Ex_Re_1), R_Ex_Re_0);
+        frame_recon = frames(:,:,i,t) + upsample(upsample(upsample(upsample(G_Ex_Re_4, 120*R_Ex_Re_3), R_Ex_Re_2), R_Ex_Re_1), R_Ex_Re_0);
         frames_recon(:,:,i,t) = frame_recon(:,:,i);
     end
 end
@@ -160,6 +156,5 @@ The frames are exported and saved as a video.
     <img src="Images/img_GrayBalancing.png" width="50%" height="50%">
     <p align="center">Gray Balancing</p>
 </p>
-
-This is the script for 'gray world automatic white balancing'. It was not used for this assignment.  
+ 
 
