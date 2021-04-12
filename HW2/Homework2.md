@@ -166,7 +166,7 @@ The frames are exported and saved as a video.
 ## Capture and Motion-Magnify your own Video
 
 <p align="center">
-    <img src="Images/own.gif" width="50%" height="50%">
+    <img src="images/own.gif" width="50%" height="50%">
     <p align="center">Own Video Motion-Magnify</p>
 </p>
  
