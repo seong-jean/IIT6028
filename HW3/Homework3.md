@@ -95,7 +95,7 @@ for h = 1:imh
             A(e, im2var(h,w+1)) = -1;
             A(e, im2var(h-1,w)) = -1;
             A(e, im2var(h+1,w)) = -1;
-            b(e,:) = 4*im(h,w,:) - im(h,w+1,:) - im(h,w-1,:) - im(h-1,w,:) - im(h+1,w,:);
+            b(e,:) = 4*im(h,w,:) - im(h+1,w,:) - im(h,w+1,:) - im(h-1,w,:) - im(h,w-1,:);
         else
             A(e, im2var(h,w)) = 1;
             b(e,:) = im_background(h,w,:);
@@ -217,3 +217,7 @@ Below images are results of some objects blended into a background using mixed b
     <p align="center">Result of octopus blended to a desert image</p> 
 </p>
 
+From the images above, we can see that a same problem has happened for all of them.
+The input image which is blended to the result is slightly transparent.
+It is not really transparent, but such results have happened because the background image's gradient has affected the resulting image too much.
+To solve such results, the 
