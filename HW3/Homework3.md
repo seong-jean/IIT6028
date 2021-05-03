@@ -85,7 +85,6 @@ im2var(1:im_size) = 1: im_size;
 A = sparse(im_size, im_size);
 b = zeros(im_size, nn);
 e = 0;
-disp("loop start");
 for h = 1:imh
     for w = 1:imw
         e = e+1;
@@ -154,9 +153,9 @@ for h = 1:imh
             A(e, im2var(h-1,w)) = -1;
             A(e, im2var(h+1,w)) = -1;
             index = [h+1 w; h w+1; h-1 w; h w-1];
-            for c = 1:4
-                im_grad(1,:) = im(h,w,:) - im(index(c,1),index(c,2),:);
-                b_grad(1,:) = im_background(h,w,:) - im_background(index(c,1),index(c,2),:);
+            for n = 1:4
+                im_grad(1,:) = im(h,w,:) - im(index(n,1),index(n,2),:);
+                b_grad(1,:) = im_background(h,w,:) - im_background(index(n,1),index(n,2),:);
                 if abs(im_grad(1,:)) >= abs(b_grad(1,:))
                     b(e, :) = b(e, :) + im_grad(1, :);
                 else
@@ -192,7 +191,28 @@ We now see that the results blend more naturally into the background image compa
 
 ## Blending with my own examples
 
-However, the mixed blending method also has some faults.
+Below images are results of some objects blended into a background using poisson blending.
+
+<p align="center">
+    <img src="images/yonsei.jpg" width="30%">
+    <img src="images/park.jpg" width="15%">
+    <img src="images/4-4.png" width="30%">
+    <p align="center">Result of human blended to Yonsei Univ. campus</p> 
+</p>
+
+<p align="center">
+    <img src="images/sea.jpg" width="30%">
+    <img src="images/dolphin.jpg" width="24.7%">
+    <img src="images/4-5.png" width="30%">
+    <p align="center">Result of dolphin blended to a sea image</p> 
+</p>
+
+<p align="center">
+    <img src="images/desert.jpeg" width="30%">
+    <img src="images/octopus.jpg" width="32%">
+    <img src="images/4-6.png" width="30%">
+    <p align="center">Result of octopus blended to a desert image</p> 
+</p>
 
 Below images are results of some objects blended into a background using mixed blending.
 
@@ -220,4 +240,7 @@ Below images are results of some objects blended into a background using mixed b
 From the images above, we can see that a same problem has happened for all of them.
 The input image which is blended to the result is slightly transparent.
 It is not really transparent, but such results have happened because the background image's gradient has affected the resulting image too much.
-To solve such results, the 
+To solve such results, the importance ratio of the image and the background, currently set as 1 : 1 can be modified so that the input image has a higher importance.
+In this way, such problems could be partly solved.
+However, what we aimed to do was to implement a blending method which merges in the object naturally to the background.
+Such objectives were achieved through the functions implemented above.
