@@ -8,27 +8,48 @@ Student Name: Seongjean Kim
 ## Toy Problem
 
 ```matlab
-function [FR, frames] = video_frame(video_name)
+function im_out = toy_reconstruct(toyim)
 
-    video = VideoReader(video_name);
-    FR = round(video.FrameRate);
-    video_len = video.NumFrames - 1;
-    height = video.Height;
-    width = video.Width;
-    ch = video.BitsPerPixel / 8;
-    frames = zeros(height, width, ch, video_len);
+[imh, imw, nn] = size(toyim);
+toyim = im2double(toyim);
+im_size = imh*imw;
+im2var = zeros(imh, imw);
+im2var(1:im_size) = 1:im_size;
 
-    for index = 1: video_len
-        frame = readFrame(video);
-        frame = double(frame) / 255;
-        frame = rgb2ntsc(frame);        
-        frames(:, :, :, index) = frame(:, :, :);
+A = sparse(imh*(imw-1)+(imh-1)*imw+1, im_size);
+b = zeros(im_size, nn);
+e = 0;
+
+for h = 1:imh
+    for w = 1:imw-1
+        e = e+1;
+        A(e,im2var(h,w+1)) = 1;
+        A(e,im2var(h,w)) = -1;
+        b(e) = toyim(h,w+1) - toyim(h,w);
     end
+end
+
+for w = 1:imw
+    for h = 1:imh-1
+        e = e+1;
+        A(e, im2var(h+1,w)) = 1;
+        A(e, im2var(h,w)) = -1;
+        b(e) = toyim(h+1,w) - toyim(h,w);
+    end
+end
+
+e = e+1;
+A(e, im2var(1,1)) = 1;
+b(e) = toyim(1,1);
+
+v = A \ b;
+im_out = reshape(v, [imh, imw]);
 end
 ```
 <p align="center">
-    <img src="images/color_transform.png" width="50%" height="50%">
-    <p align="center">Color transformation of frame from face.mp4</p> 
+    <img src="images/1-1.png" width="100%" height="100%">
+    <img src="images/toy_prolem.png" width="100%" height="100%">
+    <p align="center">Input and Result of toy_reconstruct.m</p> 
 </p>
 
 Each video file (baby2.mp4, face.mp4, own.mp4) is loaded frame by frame.
