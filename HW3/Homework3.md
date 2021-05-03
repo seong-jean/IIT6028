@@ -47,7 +47,7 @@ im_out = reshape(v, [imh, imw]);
 end
 ```
 <p align="center">
-    <img src="images/1-1.png" width="40%" height="40%">
+    <img src="images/1-2.png" width="40%" height="40%">
     <img src="images/toy_problem.png" width="40%" height="40%">
     <p align="center">Input and Result of toy_reconstruct.m</p> 
 </p>
