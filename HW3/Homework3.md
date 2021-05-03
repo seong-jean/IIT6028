@@ -74,9 +74,9 @@ Now that we understand how to implement gradient domain processing, we move on t
 ## Poisson Blending
 
 ```matlab
-function im_blend = poissonBlend(im_s, mask_s, im_background)
+function p_blend = poissonBlend(im, mask, im_background)
 
-[imh, imw, nn] = size(im_s);
+[imh, imw, nn] = size(im);
 
 im2var = zeros(imh, imw);
 im_size = imh*imw;
@@ -89,13 +89,13 @@ disp("loop start");
 for h = 1:imh
     for w = 1:imw
         e = e+1;
-        if mask_s(h,w) == 1
+        if mask(h,w) == 1
             A(e, im2var(h,w)) = 4;
             A(e, im2var(h,w-1)) = -1;
             A(e, im2var(h,w+1)) = -1;
             A(e, im2var(h-1,w)) = -1;
             A(e, im2var(h+1,w)) = -1;
-            b(e,:) = 4*im_s(h,w,:) - im_s(h,w+1,:) - im_s(h,w-1,:) - im_s(h-1,w,:) - im_s(h+1,w,:);
+            b(e,:) = 4*im(h,w,:) - im(h,w+1,:) - im(h,w-1,:) - im(h-1,w,:) - im(h+1,w,:);
         else
             A(e, im2var(h,w)) = 1;
             b(e,:) = im_background(h,w,:);
@@ -103,127 +103,117 @@ for h = 1:imh
     end
 end
 v = A \ b;
-im_blend = reshape(v, [imh, imw, nn]);
+p_blend = reshape(v, [imh, imw, nn]);
 end
 ```
-<p align="center">
-    <img src="images/2-3.png" width="50%" height="50%">
-    <p align="center">Poisson blending</p> 
-</p>
 
 Using the toy_reconstruct function as the base, we now add blending onto the process.
 The background image for this process will be hiking.jpg, and images blended to this will be penguin-chick.jpeg and penguin.jpg
-
-
-
-```matlab
-function output = upsample(gaussian_in, residual_in)
-    gaussian_temp = imresize(gaussian_in, 2);
-    output = gaussian_temp + residual_in;
-end
-```
-<p align="center">
-    <img src="images/yiq_upsample.png" width="50%" height="50%">
-    <p align="center">Upsampling</p> 
-</p>
-
-Using the function implemented above, such Laplacian pyramid for each frame can be upsampled to reform the original image of that frame.
-
-
-## Temporal Filtering
-
-```matlab
-function Hd = butterworthBandpassFilter(Fs, N, Fc1, Fc2)
-    h  = fdesign.bandpass('N,F3dB1,F3dB2', N, Fc1, Fc2, Fs);
-    Hd = design(h, 'butter');
-end
-```
+Here, the for loop is repeated for each pixel of the input image. 
+For pixel locations which are expected to be blended with the input image, the gradient value is filtered considering nearby gradient values.
+Else, for pixel locations which are not expected to have any blending operation simply get the gradient value of the background image.
+Then, this image is reshpaed back as how it was inputted.
+The result of this function is shown below, where the two penguins are blendded into the hiking image.
 
 <p align="center">
-    <img src="images/Temporal_filtering_face.png" width="50%" height="50%">
-    <p align="center">Temporal filtering for face</p> 
+    <img src="images/2-3.png" width="50%" height="50%">
+    <p align="center">Result of Poisson Blending</p> 
 </p>
 
-Temporal filtering is based on butterworthBandpassFilter. 
-Using this function, the frequency band of interest is extracted.
-The values used for baby2.mp4 is Fs = 30, N = 256, Fc1 = 0.83, Fc2 = 1.16
-The values used for face.mp4 is Fs = 30, N = 256, Fc1 = 0.8, Fc2 = 1.0
+However, from here we can see that the blending process was not perfect.
+Pixels nearby the penguins show a blurred shape, which can be observed with a little attention.
+This ploblem is occured because this function uses the input image's gradient as the main one.
+To fix this matter, an improved way will be introduced in the next section.
 
 
-## Extracting the Frequency Band of Interest
+## Blending with Mixed Gradient
 
 ```matlab
-function output = extracting(Hd, input)
-    [height, width, ch, frame_index] = size(input);
-    output = zeros(height, width, ch, frame_index);
-    out_pixel = zeros(frame_index, ch);
-    Hd_fft = freqz(Hd, frame_index);
-    for h = 1: height
-        for w = 1: width
-            for c = 1:ch
-                out_pixel(:,ch) = input(h,w,ch,:);
-                out_pixel_fft = fft(out_pixel);
-                out_filtered = abs(ifft(out_pixel_fft .* Hd_fft));
-                output(h,w,ch,:) = out_filtered(:, ch);
+function m_blend = mixedBlend(im, mask, im_background)
+
+[imh, imw, nn] = size(im);
+
+im2var = zeros(imh, imw);
+im_size = imh*imw;
+im2var(1:im_size) = 1: im_size;
+
+A = sparse(im_size, im_size);
+b = zeros(im_size, nn);
+e = 0;
+
+im_grad = zeros(1, nn);
+b_grad = zeros(1, nn);
+
+for h = 1:imh
+    for w = 1:imw
+        e = e+1;
+        if mask(h,w) == 1
+            A(e, im2var(h,w)) = 4;
+            A(e, im2var(h,w-1)) = -1;
+            A(e, im2var(h,w+1)) = -1;
+            A(e, im2var(h-1,w)) = -1;
+            A(e, im2var(h+1,w)) = -1;
+            index = [h+1 w; h w+1; h-1 w; h w-1];
+            for c = 1:4
+                im_grad(1,:) = im(h,w,:) - im(index(c,1),index(c,2),:);
+                b_grad(1,:) = im_background(h,w,:) - im_background(index(c,1),index(c,2),:);
+                if abs(im_grad(1,:)) >= abs(b_grad(1,:))
+                    b(e, :) = b(e, :) + im_grad(1, :);
+                else
+                    b(e, :) = b(e, :) + b_grad(1, :);
+                end          
             end
+        else
+            A(e, im2var(h,w)) = 1;
+            b(e, :) = im_background(h,w,:);
         end
     end
 end
-```
-<p align="center">
-    <img src="images/residual_by5.png" width="50%" height="50%">
-    <p align="center">Residual image multiplied by 5</p> 
-</p>
-
-In this process, freqz function is used to extract Hd_fft info.
-What is returned is the frequency components of the filter for fast computation.
-
-
-
-## Image Reconstruction
-```matlab
-frames_recon = zeros(height, width, ch, frame_index);
-
-R_Ex_Re_0 = zeros(size(R_Ex_0,1), size(R_Ex_0,2), ch);
-R_Ex_Re_1 = zeros(size(R_Ex_1,1), size(R_Ex_1,2), ch);
-R_Ex_Re_2 = zeros(size(R_Ex_2,1), size(R_Ex_2,2), ch);
-R_Ex_Re_3 = zeros(size(R_Ex_3,1), size(R_Ex_3,2), ch);
-G_Ex_Re_4 = zeros(size(G_Ex_4,1), size(G_Ex_4,2), ch);
-disp(size(R_Ex_3,1));
-disp(size(G_Ex_4,1));
-for i = 1:3
-    for t = 1: frame_index
-        R_Ex_Re_0(:,:,i) = R_Ex_0(:,:,i,t);
-        R_Ex_Re_1(:,:,i) = R_Ex_1(:,:,i,t);
-        R_Ex_Re_2(:,:,i) = R_Ex_2(:,:,i,t);
-        R_Ex_Re_3(:,:,i) = R_Ex_3(:,:,i,t);
-        G_Ex_Re_4(:,:,i) = G_Ex_4(:,:,i,t);
-        frame_recon = frames(:,:,i,t) + upsample(upsample(upsample(upsample(G_Ex_Re_4, 120*R_Ex_Re_3), R_Ex_Re_2), R_Ex_Re_1), R_Ex_Re_0);
-        frames_recon(:,:,i,t) = frame_recon(:,:,i);
-    end
+v = A \ b;
+m_blend = reshape(v, [imh, imw, nn]);
+m_blend(:,:,:) = max(0, m_blend(:,:,:));
+m_blend(:,:,:) = min(1, m_blend(:,:,:));
 end
 ```
 
-<p align="center">
-    <img src="images/face.gif" width="50%" height="50%">
-    <p align="center">face.mp4 with Eulerian video magnification</p>
-</p>
-
-
-<p align="center">
-    <img src="images/baby2.gif" width="50%" height="50%">
-    <p align="center">baby2.mp4 with Eulerian video magnification</p>
-</p>
-
-This process upsamples the Laplacian pyramid into a single image per frame.
-By setting the a's as different values, we can obtain results with different frequency values amplified.
-The frames are exported and saved as a video.
-
-## Capture and Motion-Magnify your own Video
+Blending with mixed gradients follows the same process as poisson blending.
+The only difference is the method used to decide b.
+Here, the gradient value of the input image and background image are compared using abs.
+The bigger gradient is used for each pixel, therefore errors like the result of Poisson blending are solved.
+The results are as below.
 
 <p align="center">
-    <img src="images/own.gif" width="50%" height="50%">
-    <p align="center">Own Video Motion-Magnify</p>
+    <img src="images/3-1.png" width="50%" height="50%">
+    <p align="center">Result of Mixed Blending</p> 
 </p>
- 
-This is the result of motion magnifying on a short clip, where the sleeve of the jacket was shifted slightly due to wind blow.
+
+We now see that the results blend more naturally into the background image compared to the results of Poisson blending.
+
+
+## Blending with my own examples
+
+However, the mixed blending method also has some faults.
+
+Below images are results of some objects blended into a background using mixed blending.
+
+<p align="center">
+    <img src="images/yonsei.jpg" width="30%" height="30%">
+    <img src="images/park.jpg" width="30%" height="30%">
+    <img src="images/4-1.png" width="30%" height="30%">
+    <p align="center">Result of human blended to Yonsei Univ. campus</p> 
+</p>
+
+<p align="center">
+    <img src="images/sea.jpg" width="30%" height="30%">
+    <img src="images/dolphin.jpg" width="30%" height="30%">
+    <img src="images/4-2.png" width="30%" height="30%">
+    <p align="center">Result of dolphin blended to a sea image</p> 
+</p>
+
+<p align="center">
+    <img src="images/desert.jpeg" width="30%" height="30%">
+    <img src="images/octopus.jpg" width="30%" height="30%">
+    <img src="images/4-3.png" width="30%" height="30%">
+    <p align="center">Result of octopus blended to a desert image</p> 
+</p>
+
