@@ -237,10 +237,15 @@ Below images are results of some objects blended into a background using mixed b
     <p align="center">Result of octopus blended to a desert image</p> 
 </p>
 
-From the images above, we can see that a same problem has happened for all of them.
+Comparing the results of each method, we can clearly see that the results of the mixed blending method blends in more naturally compared to the poisson only.
+The leftover parts of the input image are strictly removed so that only the object itself is to be blended.
+What we aimed to do was to implement a blending method which merges in the object naturally to the background.
+Such objectives were achieved through the functions implemented above.
+
+
+However, from the images above, we can see that a same problem has happened for all of them.
 The input image which is blended to the result is slightly transparent.
 It is not really transparent, but such results have happened because the background image's gradient has affected the resulting image too much.
 To solve such results, the importance ratio of the image and the background, currently set as 1 : 1 can be modified so that the input image has a higher importance.
 In this way, such problems could be partly solved.
-However, what we aimed to do was to implement a blending method which merges in the object naturally to the background.
-Such objectives were achieved through the functions implemented above.
+
