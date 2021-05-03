@@ -212,7 +212,7 @@ Below images are results of some objects blended into a background using mixed b
 
 <p align="center">
     <img src="images/desert.jpeg" width="30%">
-    <img src="images/octopus.jpg" width="35%">
+    <img src="images/octopus.jpg" width="32%">
     <img src="images/4-3.png" width="30%">
     <p align="center">Result of octopus blended to a desert image</p> 
 </p>
