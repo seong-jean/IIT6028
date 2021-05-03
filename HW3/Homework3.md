@@ -205,7 +205,7 @@ Below images are results of some objects blended into a background using mixed b
 
 <p align="center">
     <img src="images/sea.jpg" width="30%">
-    <img src="images/dolphin.jpg" width="24%">
+    <img src="images/dolphin.jpg" width="25%">
     <img src="images/4-2.png" width="30%">
     <p align="center">Result of dolphin blended to a sea image</p> 
 </p>
