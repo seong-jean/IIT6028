@@ -197,9 +197,9 @@ However, the mixed blending method also has some faults.
 Below images are results of some objects blended into a background using mixed blending.
 
 <p align="center">
-    <img src="images/yonsei.jpg" width="30%" height="30%">
-    <img src="images/park.jpg" height="10%">
-    <img src="images/4-1.png" width="30%" height="30%">
+    <img src="images/yonsei.jpg" width="30%">
+    <img src="images/park.jpg" width="30%">
+    <img src="images/4-1.png" width="30%">
     <p align="center">Result of human blended to Yonsei Univ. campus</p> 
 </p>
 
