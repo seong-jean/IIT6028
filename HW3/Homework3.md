@@ -48,7 +48,7 @@ end
 ```
 <p align="center">
     <img src="images/1-1.png" width="100%" height="100%">
-    <img src="images/toy_prolem.png" width="100%" height="100%">
+    <img src="images/toy_problem.png" width="100%" height="100%">
     <p align="center">Input and Result of toy_reconstruct.m</p> 
 </p>
 
