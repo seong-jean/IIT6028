@@ -5,6 +5,10 @@ Environment: MATLAB
 Student ID: 2021314109
 Student Name: Seongjean Kim
 
+This assignment focuses on gradient-domain processing, and in particular Poisson blending.
+Functions are implemented to blend an object or textrue from a source into a target image.
+
+
 ## Toy Problem
 
 ```matlab
@@ -49,36 +53,67 @@ end
 <p align="center">
     <img src="images/1-2.png" width="40%" height="40%">
     <img src="images/toy_problem.png" width="40%" height="40%">
-    <p align="center">Input and Result of toy_reconstruct.m</p> 
+    <p align="center">Input(Left) and Result(Right) of toy_reconstruct.m</p> 
 </p>
 
-Each video file (baby2.mp4, face.mp4, own.mp4) is loaded frame by frame.
-Becuase the value of each video is in the range [0, 255], I converted this to [0,1].
-Then, for further use, the video color space is transfered from RGB to YIQ.
-The result is returned as frames(height, width, channel, frame index).
+toy_reconstruction function is a practice on implemntation for gradient domain processing.
+The process considers each x and y axis seperately and stores the gradient values using sparse function.
+The first for loop is processed on each row, and the next loop is processed on each column.
+After each process is completed, the \ function of matlab is used to compute division in the opposite direction.
+The resulting image is the returned as above.
+
+The overall difference between the original and result image was as follow.
+
+Error: 0+2.5417e-06i
+
+Which, we can conclude that the two images are almost identical.
+Now that we understand how to implement gradient domain processing, we move on to implementing Poisson blending.
 
 
 
-## Laplacian Pyramid
+## Poisson Blending
 
 ```matlab
-function [output, residual] = laplacian_pyramid(GSD, input)
-    [height, width, ~] = size(input);
-    img_blur = imgaussfilt(input, GSD);
-    residual = input - img_blur;
-    output = img_blur(1:2:height, 1:2:width, :);
+function im_blend = poissonBlend(im_s, mask_s, im_background)
+
+[imh, imw, nn] = size(im_s);
+
+im2var = zeros(imh, imw);
+im_size = imh*imw;
+im2var(1:im_size) = 1: im_size;
+
+A = sparse(im_size, im_size);
+b = zeros(im_size, nn);
+e = 0;
+disp("loop start");
+for h = 1:imh
+    for w = 1:imw
+        e = e+1;
+        if mask_s(h,w) == 1
+            A(e, im2var(h,w)) = 4;
+            A(e, im2var(h,w-1)) = -1;
+            A(e, im2var(h,w+1)) = -1;
+            A(e, im2var(h-1,w)) = -1;
+            A(e, im2var(h+1,w)) = -1;
+            b(e,:) = 4*im_s(h,w,:) - im_s(h,w+1,:) - im_s(h,w-1,:) - im_s(h-1,w,:) - im_s(h+1,w,:);
+        else
+            A(e, im2var(h,w)) = 1;
+            b(e,:) = im_background(h,w,:);
+        end
+    end
+end
+v = A \ b;
+im_blend = reshape(v, [imh, imw, nn]);
 end
 ```
 <p align="center">
-    <img src="images/gaussian_example.png" width="50%" height="50%">
-    <p align="center">Laplacian Pyramid</p> 
+    <img src="images/2-3.png" width="50%" height="50%">
+    <p align="center">Poisson blending</p> 
 </p>
 
+Using the toy_reconstruct function as the base, we now add blending onto the process.
+The background image for this process will be hiking.jpg, and images blended to this will be penguin-chick.jpeg and penguin.jpg
 
-The laplacian pyramid is obtained by this function.
-The Gaussian standard deviation is given as a value, and the input is a certain frame from frames.
-For each frame, this function is repeated recursively for a number of times to obtain several levels of the Laplacian pyramid.
-By this process, the residuals of each level is obtained.
 
 
 ```matlab
