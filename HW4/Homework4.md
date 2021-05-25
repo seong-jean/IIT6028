@@ -82,6 +82,7 @@ The results are for each weight function uniform, tent and gaussian.
     <p align="center">RGB plotted (Left: Uniform, Center: Tent, Right: Gaussian)</p> 
 </p>
 
+Comparint the smootheness of each, The Gaussian shows the best result, while the uniform shows the worst. 
+There seems to be not much difference between the Gaussian and the Tent weight functions.
 
-
-
+These are then proceeded in further process.
