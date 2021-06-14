@@ -61,7 +61,7 @@ The u value is increased vertically, and the v value is increased horizontally.
 This image will be used for processing in further steps.
 
 <p align="center">
-    <img src="images/Sub-aperture_result_small.PNG" width="80%" height="50%">
+    <img src="Images/Sub-aperture_result_small.PNG" width="80%" height="50%">
     <p align="center">Sub-aperture results in mosaic form</p> 
 </p>
 
@@ -113,7 +113,7 @@ Depth value 0 image is focused on the back part of the image, while as the depth
 However, at a certain point the focus is shifted too much and the whole image shows blur without any focus point found.
 
 <p align="center">
-    <img src="images/Focal_stack.PNG" width="80%" height="50%">
+    <img src="Images/Focal_stack.PNG" width="80%" height="50%">
     <p align="center">Focal-stack results with depth value 0.0(top-left) to 2.0(bottom-center)</p> 
 </p>
 
@@ -190,6 +190,12 @@ imwrite(depth_map, 'results/depth_map.png');
 The result is as below.
 
 <p align="center">
-    <img src="images/all_focus_result.PNG" width="80%" height="50%">
+    <img src="Images/all_focus_result.PNG" width="80%" height="50%">
+    <p align="center">All-focus image result with std_dev values 3, 5</p> 
+</p>
+
+
+<p align="center">
+    <img src="Images/img_depth_map.PNG" width="80%" height="50%">
     <p align="center">All-focus image result with std_dev values 3, 5</p> 
 </p>
