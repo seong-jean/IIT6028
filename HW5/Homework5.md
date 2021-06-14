@@ -61,7 +61,7 @@ The u value is increased vertically, and the v value is increased horizontally.
 This image will be used for processing in further steps.
 
 <p align="center">
-    <img src="Images/Sub-aperture_result_small.PNG" width="80%" height="50%">
+    <img src="Images/Sub-aperture_result_small.png" width="80%" height="50%">
     <p align="center">Sub-aperture results in mosaic form</p> 
 </p>
 
@@ -190,12 +190,12 @@ imwrite(depth_map, 'results/depth_map.png');
 The result is as below.
 
 <p align="center">
-    <img src="Images/all_focus_result.PNG" width="80%" height="50%">
+    <img src="Images/all_focus_result.png" width="80%" height="50%">
     <p align="center">All-focus image result with std_dev values 3, 5</p> 
 </p>
 
 
 <p align="center">
-    <img src="Images/img_depth_map.PNG" width="80%" height="50%">
+    <img src="Images/img_depth_map.png" width="80%" height="50%">
     <p align="center">All-focus image result with std_dev values 3, 5</p> 
 </p>
