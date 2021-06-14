@@ -1,88 +1,59 @@
-## Explore High Dynamic Range imaging and tonemapping
+## Light Field Rendering, Focal Stacks, and Depth from Defocus
 
-Homework Assignment 4
+Homework Assignment 5
 Environment: MATLAB
 Student ID: 2021314109
 Student Name: Seongjean Kim
 
-This assignment focuses on exploring high dynamic range imaging and tonemapping.
-HDR is used to create floating-point precision images, and tonemapping is used to create floating-point precision images.
+This assignment focuses on exploring light fields, focal stacks, and depth from defocus.
+Having access to the full light field of a scene allows creating images that correspond to different viewpoints.
+Such different viewpoints will be combined to create a all-focus image as a result.
 
 
-## HDR Imaging
-Two image sets are given. One is in a .jpg format, and the other is in a .nef format.
-jpg format is easy to use, but the .nef format is not readable in matlab, therefore we need preprocessing to be done.
-For such format, we use the dcraw program to change the format to .tiff
-dcraw program provides several flags to choose amongst, and for our project I picked on the flags as such.
+## Initials
 
-```
-dcraw -w -W -o 1 -q 3 -4 -T
-```
-The -w flag transfers the image using the camera's white balance.
-The -W flag prevents automatic brightening in the image.
-The -o flag decides the output color space. 
-The order is (raw, sRGB, Adobe, Wide, ProPhoto, XYZ, ACES) and for our project, i choose sRGB(=1).
-The -q flag sets the interpolation quality, and for high quality i chose 3
-The -4 flag represents linear 16-bit image as an output.
-The -T flag writes the output in a .tiff format.
-
-Now we are ready to process the images further on.
-
-
-## Linearize Rendered Images
+First, the light field image is loaded to Matlab.
+Then, we create a 5-dimensional array L(u, v, s, t, c) from the loaded image.
+From above, u and v correspond to the coordinates on the aperture,
+s and t correspond to the coordinates on the lenslet array.
+c corresponds to the color channels of the input, where in this project c will be 3.
 
 ```matlab
-function [g, lE] = gsolve(Z,B,l,w)
-    n = 256;
-    A = sparse(size(Z,1)*size(Z,2)+n+1,n+size(Z,1));
-    b = zeros(size(A,1),1);
-    k = 1;
-    for i=1:size(Z,1)
-        for j=1:size(Z,2)
-            wij = w(Z(i,j)+1);
-            A(k,Z(i,j)+1) = wij; 
-            A(k,n+i) = -wij; 
-            b(k,1) = wij * B(j);
-            k=k+1;
+img_lightfields = imread('chessboard_lightfield.png');
+
+global u v s t c
+u = 16;
+v = 16;
+s = size(img_lightfield, 1) / u;
+t = size(img_lightfield, 2) / v;
+c = 3;
+
+img_array = zeros(u, v, s, t, c);
+img_array = uint8(img_array);
+for l = 1:s
+    for m = 1:t
+        for n = 1:u
+            for o = 1:v
+                img_array(n, o, l, m, 1) = img_lightfield(u*(l-1)+n, v*(m-1)+o, 1);
+                img_array(n, o, l, m, 2) = img_lightfield(u*(l-1)+n, v*(m-1)+o, 2);
+                img_array(n, o, l, m, 3) = img_lightfield(u*(l-1)+n, v*(m-1)+o, 3);
+            end
         end
     end
-    A(k,129) = 1;
-    k=k+1;
-    for i=1:n-2
-        A(k,i)=l*w(i+1); 
-        A(k,i+1)=-2*l*w(i+1); 
-        A(k,i+2)=l*w(i+1);
-        k=k+1;
-    end
-    x = A\b;
-    g = x(1:n);
-    lE = x(n+1:size(x, 1));
 end
 ```
 
-This gsolve function is used to linearize the rendered image.
-It recieves a Z array which is the pixel values of an image reshaped to a single strip.
-B is the shutter speed, l is lambda value of 1000, and w is the weight function.
+## Sub-aperture views
+A sub-aperture is created by rearranging the pixels in the input image.
 
-A total of 3 different weight functions are used in this project.
-Uniform, tent, and gaussian weight functions are each seperately used for this project, and the results of each session are compared.
+```matlab
 
-The function starts with setting A and b arrays.
-Then we include the data fitting equations
-Next, we fix the curve by setting its middle value as 0.
-Finally, we include a smoothing equation and solve the system using SVD.
-The results are returend to g and lE as a single channel.
-This function will be used seperately on R G B channels to retrieve the g and lE for each channel of each image.
+```
 
-To see how things are going on, I plotted each rgb graph to see the smoothing.
-The results are for each weight function uniform, tent and gaussian.
+The resulting image is shown below in a form of a 16x16 2D mosaic.
+The u value is increased vertically, and the v value is increased horizontally.
 
 <p align="center">
     <img src="images/capture.PNG" width="80%" height="50%">
     <p align="center">RGB plotted (Left: Uniform, Center: Tent, Right: Gaussian)</p> 
 </p>
-
-Comparint the smootheness of each, The Gaussian shows the best result, while the uniform shows the worst. 
-There seems to be not much difference between the Gaussian and the Tent weight functions.
-
-These are then proceeded in further process.
