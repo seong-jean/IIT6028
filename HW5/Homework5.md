@@ -61,7 +61,7 @@ The u value is increased vertically, and the v value is increased horizontally.
 This image will be used for processing in further steps.
 
 <p align="center">
-    <img src="images/Sub-aperture_result.PNG" width="80%" height="50%">
+    <img src="images/Sub-aperture_result_small.PNG" width="80%" height="50%">
     <p align="center">Sub-aperture results in mosaic form</p> 
 </p>
 
