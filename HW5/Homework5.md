@@ -132,26 +132,22 @@ stack_low = zeros(s, t, depth);
 stack_high = zeros(s, t, depth);
 stack_sharpness = zeros(s, t, depth);
 
-std_dev1 = 5;
+std_dev1 = 3;
 std_dev2 = 5;
 
 for depth_t = 1:depth
     img_focal_stack = refocus(:, :, :, depth_t);
-    
-    % luminance
+
     img_combined_xyz = rgb2xyz(img_focal_stack, 'ColorSpace', 'srgb');
     img_combined_lum = img_combined_xyz(:, :, 2);
     stack_luminance(:,:,depth_t) = img_combined_lum;
 
-    % low
     img_combined_low = imgaussfilt(img_combined_lum, std_dev1);
     stack_low(:,:,depth_t) = img_combined_low;
 
-    % high
     img_combined_high = img_combined_lum - img_combined_low;
     stack_high(:,:,depth_t) = img_combined_high;
-    
-    % sharpness
+
     img_combined_sharp = imgaussfilt(img_combined_high .^ 2, std_dev2);
     stack_sharpness(:,:,depth_t) = img_combined_sharp;
 end
@@ -184,7 +180,7 @@ all_focus_result = uint8(all_focus_result);
 depth_map = (1 - depth_map / 2);
 
 imwrite(all_focus_result, 'results/all_focus_result.png');
-imwrite(depth_map, 'results/depth_map.png');
+imwrite(depth_map, 'results/img_depth_map.png');
 ```
 
 The result is as below.
@@ -197,5 +193,5 @@ The result is as below.
 
 <p align="center">
     <img src="Images/img_depth_map.png" width="80%" height="50%">
-    <p align="center">All-focus image result with std_dev values 3, 5</p> 
+    <p align="center">Depth map image with std_dev values 3, 5</p> 
 </p>
